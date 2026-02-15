@@ -10,20 +10,41 @@ const Index = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !message.trim()) {
       toast({ title: "Erreur", description: "Veuillez remplir tous les champs.", variant: "destructive" });
       return;
     }
 
-    const subject = encodeURIComponent(`Intérêt pour l'achat du site — de ${name}`);
-    const body = encodeURIComponent(
-      `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-    window.location.href = `mailto:hassane9095@gmail.com?subject=${subject}&body=${body}`;
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/hassane9095@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Intérêt pour l'achat du site — de ${name}`,
+        }),
+      });
 
-    toast({ title: "Redirection", description: "Votre client email va s'ouvrir." });
+      if (response.ok) {
+        toast({ title: "Envoyé !", description: "Votre message a bien été envoyé." });
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        toast({ title: "Erreur", description: "L'envoi a échoué, réessayez.", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Erreur", description: "L'envoi a échoué, réessayez.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -54,13 +75,13 @@ const Index = () => {
             <Label htmlFor="message">Message</Label>
             <Textarea id="message" placeholder="Votre message…" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} />
           </div>
-          <Button type="submit" className="w-full" size="lg">
-            Envoyer
+          <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+            {isSubmitting ? "Envoi en cours…" : "Envoyer"}
           </Button>
         </form>
 
         <p className="text-center text-xs text-muted-foreground">
-          En cliquant sur « Envoyer », votre client email s'ouvrira avec un message pré-rempli.
+          Votre message sera envoyé directement à notre boîte de réception.
         </p>
       </div>
     </div>
