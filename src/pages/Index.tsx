@@ -50,43 +50,45 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-lg space-y-8">
-        <div className="text-center space-y-3">
+    <main className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
+      <article className="w-full max-w-lg space-y-8">
+        <header className="text-center space-y-3">
           <span className="inline-block rounded-full bg-destructive/10 px-4 py-1 text-sm font-semibold text-destructive tracking-wide uppercase">
             À vendre
           </span>
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Ce site est en vente
+            Livraison Facile — Site à vendre
           </h1>
           <p className="text-lg text-muted-foreground max-w-md mx-auto">
-            Vous êtes intéressé par l'acquisition de ce site ? Remplissez le formulaire ci-dessous pour nous contacter.
+            Vous êtes intéressé par l'acquisition de ce site de livraison ? Remplissez le formulaire ci-dessous pour nous contacter.
           </p>
-        </div>
+        </header>
 
-        <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-border bg-card p-6 shadow-lg">
-          <div className="space-y-2">
-            <Label htmlFor="name">Nom complet</Label>
-            <Input id="name" placeholder="Votre nom" value={name} onChange={(e) => setName(e.target.value)} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Adresse email</Label>
-            <Input id="email" type="email" placeholder="vous@exemple.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
-            <Textarea id="message" placeholder="Votre message…" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} />
-          </div>
-          <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-            {isSubmitting ? "Envoi en cours…" : "Envoyer"}
-          </Button>
-        </form>
+        <section aria-label="Formulaire de contact">
+          <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-border bg-card p-6 shadow-lg">
+            <div className="space-y-2">
+              <Label htmlFor="name">Nom complet</Label>
+              <Input id="name" placeholder="Votre nom" value={name} onChange={(e) => setName(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Adresse email</Label>
+              <Input id="email" type="email" placeholder="vous@exemple.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="message">Message</Label>
+              <Textarea id="message" placeholder="Votre message…" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} />
+            </div>
+            <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+              {isSubmitting ? "Envoi en cours…" : "Envoyer"}
+            </Button>
+          </form>
+        </section>
 
-        <p className="text-center text-xs text-muted-foreground">
-          Votre message sera envoyé directement à notre boîte de réception.
-        </p>
-      </div>
-    </div>
+        <footer className="text-center text-xs text-muted-foreground">
+          <p>Votre message sera envoyé directement à notre boîte de réception.</p>
+        </footer>
+      </article>
+    </main>
   );
 };
 
