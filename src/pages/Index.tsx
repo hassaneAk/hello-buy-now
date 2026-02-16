@@ -37,6 +37,8 @@ const Index = () => {
         setName("");
         setEmail("");
         setMessage("");
+      } else if (response.status === 429) {
+        toast({ title: "Trop de requêtes", description: "Veuillez patienter quelques minutes avant de réessayer.", variant: "destructive" });
       } else {
         toast({ title: "Erreur", description: "L'envoi a échoué, réessayez.", variant: "destructive" });
       }
