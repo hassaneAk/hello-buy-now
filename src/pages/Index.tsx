@@ -21,7 +21,7 @@ const Index = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch("https://formsubmit.co/ajax/hassane9095@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/livraisonfacile@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
